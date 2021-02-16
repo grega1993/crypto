@@ -1,11 +1,11 @@
 <?php
     include_once "header.php";
 ?>
-<!-- Contact Section-->
+
 <section class="page-section" id="contact">
     <div class="container">
         <!-- Contact Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Registriraj se</h2>
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Registracija</h2>
         <!-- Icon Divider-->
         <div class="divider-custom">
             <div class="divider-custom-line"></div>
@@ -17,17 +17,50 @@
             <div class="col-lg-8 mx-auto">
                 <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
                 <form action="user_insert.php" method="post">
-                    <input type="text" name="first_name" placeholder="Vnesi ime" required="required" /><br/> 
-                    <input type="text" name="last_name" placeholder="Vnesi priimek" required="required" /><br/>
-                    <input type="email" name="email" placeholder="Vnesite e-pošto" required="required" /><br/>
-                    <input type="password" name="pass" placeholder="Vnesite geslo" required="required" /><br/>                
-                    <input type="password" name="pass2" placeholder="Ponovno vnesite geslo" required="required" /><br/>
-                    <input type="submit" name="submit" value="Pošlji" /> <br/>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>Ime</label>
+                            <input class="form-control" type="text" name="first_name" placeholder="Vnesite ime"
+                                required="required" /> <br />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>Priimek</label>
+                            <input class="form-control" type="text" name="last_name" placeholder="Vnesite priimek"
+                                required="required" /> <br />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>E-Pošta</label>
+                            <input class="form-control" type="email" name="email" placeholder="Vnesite e-pošto"
+                                required="required" /> <br />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>Geslo</label>
+                            <input class="form-control" type="password" name="pass" placeholder="Vnesite geslo"
+                                required="required" /> <br />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>Ponovi geslo</label>
+                            <input class="form-control" type="password" name="pass2" placeholder="Ponovno vnesite geslo"
+                                required="required" /> <br />
+                        </div>
+                    </div>
+                    <br />
+                            <div id="success"></div>
+                            <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Pošlji</button></div>
                 </form>
             </div>
         </div>
     </div>
 </section>
+
 <?php
     include_once "footer.php";
 ?>
