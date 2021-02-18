@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once "database.php";
 
 $email = $_POST['email'];
@@ -12,6 +13,10 @@ if(!empty($email) && !empty($pass)){
     if($stmt->rowCount() == 1){
         $user = $stmt->fetch(); //$user['first_name'], $user['last_name'] ...
         if(password_verify($pass,$user['pass'])){
+            $_SESSION['user_id']=$user['id'];
+            $_SESSION['admin']= $user['admin'];
+            $_SESSION['first_name'] = $user['first_name'];
+            $_SESSION['last_name'] = $user['last_name'];
             header("Location: index.php");
             die();
         }
