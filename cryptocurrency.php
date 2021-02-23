@@ -14,7 +14,7 @@ if($stmt->rowCount() != 1){
 $crypto = $stmt->fetch();
 
 ?>
-<a href="cryptocurrency_delete.php?id=<?php echo $crypto['id'];?>" class="btn btn-primary" onclick="return confirm('Prepričani?')">Izbriši</a></br >
+<a href="cryptocurrency_delete.php?id=<?php echo $crypto['id'];?>" class="btn btn-primary" onclick="return confirm('Prepričani?')">Izbriši</a>
 <a href="cryptocurrency_edit.php?id=<?php echo $crypto['id'];?>" class="btn btn-primary">Uredi</a>
 
 <!-- Masthead-->
@@ -32,6 +32,8 @@ $crypto = $stmt->fetch();
         </div>
         <!-- Masthead Subheading-->
         <p class="masthead-subheading font-weight-light mb-0"><?php echo $crypto['description'];?></p>
+        <div class="crypto_price">Trenutna cena:<span><?php echo $crypto['current_price'];?></span></div>
+        <div class="crypto_rating">Trenutna ocena:<span><?php echo $crypto['rating'];?></span></div>
     </div>
 </section>
 
