@@ -10285,3 +10285,21 @@ label.star:before {
   font-family: FontAwesome
 }
 /*rating stars css*/
+div.komentar {
+  border-color: royalblue;
+  border-width: 2px;
+  border-style: solid;
+  margin-top: 5px;
+  padding: 10px 0px 5px 15px;
+}
+.komentar .oseba {
+  font-style: italic;
+  font-size: 0.8em;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.komentar .vsebina{
+  font-weight: bold;
+}
+
+/*oblika komentarjev*/

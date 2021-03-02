@@ -59,7 +59,7 @@ $crypto = $stmt->fetch();
         </div>
     </div>
 </div>
-<div class="komentarji" id="komentarji">
+<div class="komentarji container" id="komentarji">
     <div class="obrazec">
         <form action="comment_insert.php" method="post">
             <input type="hidden" name="id" value="<?php echo $crypto['id'];?>" />
@@ -67,7 +67,7 @@ $crypto = $stmt->fetch();
             <input type="submit" value="Komentiraj" class="btn btn-primary" />
         </form>
     </div>
-    <div class="seznam">
+    <div class="seznam d-flex flex-column">
         <?php
             $query = "SELECT * FROM comments WHERE cryptocurrency_id = ?";
             $stmt = $pdo ->prepare($query);
@@ -75,9 +75,47 @@ $crypto = $stmt->fetch();
 
             while ($row = $stmt->fetch()){
                 echo '<div class="komentar">';
+                //ali je trenutno prijavlen uporabnik avtor komentarja
+                if($_SESSION['user_id'] == $row['user_id']){
+                    echo '<a href="comment_delete.php?id='.$row['id'].'" onclick="return confirm(\'Prepričani?\')">Izbriši</a>';
+                    echo ' <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal'.$row['id'].'">Uredi</div>';
+                    //modalno okno za urejanje
+                    echo '<div class="portfolio-modal modal fade" id="portfolioModal'.$row['id'].'" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">';
+                    echo '<div class="modal-dialog modal-xl" role="document">';
+                    echo '<div class="modal-content">';
+                    echo '<button class="close" type="button" data-dismiss="modal" aria-label="Close">';
+                    echo '<span aria-hidden="true"><i class="fas fa-times"></i></span>';
+                    echo '</button>';
+                    echo '<div class="modal-body text-center">';
+                    echo '<div class="container">';
+                    echo '<div class="row justify-content-center">';
+                    echo '<div class="col-lg-8">';
+                    echo '<!-- Portfolio Modal - Title-->';
+                    echo '<h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label">Uredi komentar</h2>';
+                    echo '<!-- Icon Divider-->';
+                    echo '<div class="divider-custom">';
+                    echo '<div class="divider-custom-line"></div>';
+                    echo '<div class="divider-custom-icon"><i class="fas fa-star"></i></div>';
+                    echo '<div class="divider-custom-line"></div>';
+                    echo '</div>';
+                    echo '<form action="comment_update.php" method="post">';
+                    echo '<input type="hidden" name="id" value="'.$row['id'].'" />';
+                    echo '<textarea name="content" rows="5" cols="15">'.$row['content'].'</textarea> </br>';
+                    echo '<input type="submit" value="Shrani" class="btn btn-primary" />';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+
+                }
                 echo '<div class="oseba">'.getFullName($row['user_id']).' ('.date('d. m. Y H:i',strtotime($row['date_modify'])).')</div>';
                 echo '<div class="vsebina">'.$row['content'].'</div>';
                 echo '</div>';
+
+
             }
         ?>
         
