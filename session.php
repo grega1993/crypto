@@ -22,5 +22,19 @@ function getFullName($user_id){
     return  $user['first_name'].' '.$user['last_name'];
 }
 
+//vrača za trenutno prijavljenega uporabnika
+function admin(){
+    return $_SESSION['admin'];
+}
+
+//če trenutno prjavljeni ni admin ga preusmeri na index
+function adminOnly(){
+    if(isset($_SESSION['admin']) || ($_SESSION['admin'] != 1)){
+        header("Location: index.php");
+        die();
+    }
+}
+
+
 
 ?>

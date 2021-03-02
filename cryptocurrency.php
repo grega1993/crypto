@@ -14,10 +14,15 @@ if($stmt->rowCount() != 1){
 $crypto = $stmt->fetch();
 
 ?>
+<?php
+    if(admin()){
+        ?>
 <a href="cryptocurrency_delete.php?id=<?php echo $crypto['id'];?>" class="btn btn-primary"
     onclick="return confirm('Prepričani?')">Izbriši</a>
 <a href="cryptocurrency_edit.php?id=<?php echo $crypto['id'];?>" class="btn btn-primary">Uredi</a>
-
+<?php
+    }
+?>
 <!-- Masthead-->
 <section class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">

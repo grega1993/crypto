@@ -2,7 +2,14 @@
     include_once "header.php";
 ?>
 
+<?php
+
+    if(admin()){
+        ?>
 <a href="cryptocurrencies_add.php" class="btn btn-primary">Dodaj valuto</a>
+<?php
+    }
+?>
 <br />
 <!-- Portfolio Section-->
 <section class="page-section portfolio">

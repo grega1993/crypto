@@ -1,6 +1,7 @@
 <?php
     include_once "header.php";
     include_once "database.php";
+    adminOnly();
 
     $id = (int) $_GET['id'];
     $query = "SELECT * FROM cryptocurrencies WHERE id = ?";
