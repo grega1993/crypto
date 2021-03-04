@@ -4,20 +4,16 @@
     adminOnly();
 
     $title = $_POST['title'];
-    $description = $_POST['description'];
-    $current_price = floatval($_POST['current_price']);
-    
-    $target_dir = "uploads/";
-
+    $id = (int)$_POST['id'];
+   
+    $target_dir = "images/";
     $random =  date('YmdHisu'); //20211212234235654
-
-
-    $target_file = $target_dir . $random . basename($_FILES["logo"]["name"]);
+    $target_file = $target_dir . $random . basename($_FILES["url"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
     //preveri ali ima datoteka dejansko velikost
-    $check = getimagesize($_FILES["logo"]["tmp_name"]);
+    $check = getimagesize($_FILES["url"]["tmp_name"]);
     if($check !== false) {
         $uploadOk = 1;
     } 
@@ -27,7 +23,7 @@
     }
 
     // Check file size max 5mb
-    if ($_FILES["logo"]["size"] > 5000000) {
+    if ($_FILES["url"]["size"] > 5000000) {
     $uploadOk = 0;
     }
 
@@ -39,25 +35,25 @@
 
 
 
-if(!empty($title) && ($uploadOk == 1)){
+if($uploadOk == 1){//preverim ce so podatki o sliki ustrezni
 
-    if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
+    if (move_uploaded_file($_FILES["url"]["tmp_name"], $target_file)) {
         //zapiše se vse v bazo
-    $query = "INSERT INTO cryptocurrencies(title,description,current_price,logo) VALUES(?,?,?,?)";
+    $query = "INSERT INTO images(title,url,cryptocurrency_id,user_id) VALUES(?,?,?,?)";
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$title,$description,$current_price,$target_file]);
+    $stmt->execute([$title,$target_file,$id,$_SESSION['user_id']]);
 
-    header("location: cryptocurrencies.php");
+    header("location: cryptocurrency.php?id=$id");
     die();} 
         
     else {
-        header("location: cryptocurrency_add.php");
+        header("location: cryptocurrency.php?id=$id");
     die();
     }
 
 }
 else{
-    header("location: cryptocurrency_add.php");
+    header("location: cryptocurrency.php?id=$id");
     die();
 }
 
