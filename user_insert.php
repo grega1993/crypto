@@ -18,9 +18,11 @@ if(!empty($first_name) && !empty($last_name)&& !empty($email)&& !empty($pass)&& 
     $stmt->execute([$first_name,$last_name,$email,$pass]);
 
     header("location: login.php");
+    die();
 }
 else{
     header("location: register.php");
+    die();
 }
 
 
